@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import './globals.css'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://outure.co'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://getouture.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

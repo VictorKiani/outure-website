@@ -81,7 +81,7 @@ function getJsonLd(siteUrl: string) {
 }
 
 export default function Home() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://outure.co'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://getouture.com'
   const jsonLd = getJsonLd(siteUrl)
 
   return (
