@@ -8,10 +8,11 @@ export const metadata: Metadata = {
     default: 'OUTURE | Business Analysis, Strategy & AI Solutions | Victor Kiani',
     template: '%s | OUTURE',
   },
-  description: 'OUTURE is a NYC-based consulting firm founded by Victor Kiani, specializing in business analysis, strategic thinking, innovation, automation, and AI solutions. Transform your business with data-driven insights.',
+  description: 'OUTURE is a veteran-owned NYC-based consulting firm founded by Victor Kiani, specializing in business analysis, strategic thinking, innovation, automation, and AI solutions. D-U-N-S: 137354060.',
   keywords: [
     'Victor Kiani',
     'OUTURE',
+    'veteran-owned business',
     'business consulting',
     'business analysis',
     'AI solutions',

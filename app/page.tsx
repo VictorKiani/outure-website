@@ -19,7 +19,7 @@ const jsonLd = {
         '@type': 'ImageObject',
         url: 'https://outure.co/logo.png',
       },
-      description: 'NYC-based consulting firm specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
+      description: 'Veteran-owned NYC-based consulting firm specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'New York City',
@@ -32,6 +32,8 @@ const jsonLd = {
         name: 'Victor Kiani',
       },
       foundingDate: '2025-03',
+      duns: '137354060',
+      keywords: 'veteran-owned business, consulting',
       sameAs: [
         'https://getouture.com',
       ],

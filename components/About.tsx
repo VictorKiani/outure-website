@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { MapPin, Target, Award, Users } from 'lucide-react'
+import { MapPin, Target, Award, Users, Shield } from 'lucide-react'
 
 interface CounterProps {
   end: number
@@ -83,7 +83,7 @@ export default function About() {
 
             <div className="space-y-6 text-muted-foreground">
               <p className="text-lg">
-                OUTURE is a forward-thinking consulting firm dedicated to helping businesses
+                OUTURE is a veteran-owned consulting firm dedicated to helping businesses
                 navigate the complexities of modern markets through strategic innovation and
                 cutting-edge technology solutions.
               </p>
@@ -99,17 +99,29 @@ export default function About() {
               </p>
             </div>
 
-            {/* NYC Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="mt-8 inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background border border-border"
-            >
-              <MapPin className="w-5 h-5 text-primary" />
-              <span className="font-medium">Headquartered in New York City</span>
-            </motion.div>
+            {/* Badges */}
+            <div className="mt-8 flex flex-wrap gap-3">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background border border-border"
+              >
+                <Shield className="w-5 h-5 text-primary" />
+                <span className="font-medium">Veteran-Owned Business</span>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background border border-border"
+              >
+                <MapPin className="w-5 h-5 text-primary" />
+                <span className="font-medium">New York City</span>
+              </motion.div>
+            </div>
           </motion.div>
 
           {/* Stats Grid */}
