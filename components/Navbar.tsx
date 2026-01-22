@@ -3,19 +3,24 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import ThemeToggle from './ThemeToggle'
 import { smoothScroll } from '@/lib/utils'
 
 const navLinks = [
-  { name: 'Services', href: 'services' },
-  { name: 'Approach', href: 'approach' },
-  { name: 'About', href: 'about' },
-  { name: 'Contact', href: 'contact' },
+  { name: 'Services', href: 'services', isPage: false },
+  { name: 'Approach', href: 'approach', isPage: false },
+  { name: 'About', href: 'about', isPage: false },
+  { name: 'Leadership', href: '/leadership', isPage: true },
+  { name: 'Contact', href: 'contact', isPage: false },
 ]
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const isHomePage = pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,8 +30,14 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (href: string) => {
-    smoothScroll(href)
+  const handleNavClick = (href: string, isPage: boolean) => {
+    if (isPage) return // Let Link handle it
+
+    if (isHomePage) {
+      smoothScroll(href)
+    } else {
+      window.location.href = `/#${href}`
+    }
     setIsMobileMenuOpen(false)
   }
 
@@ -45,28 +56,41 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <motion.button
-              onClick={() => smoothScroll('hero')}
-              className="text-2xl font-bold tracking-tight text-foreground"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              OUTURE
-            </motion.button>
+            <Link href="/">
+              <motion.span
+                className="text-2xl font-bold tracking-tight text-foreground cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                OUTURE
+              </motion.span>
+            </Link>
 
             {/* Desktop Navigation + Theme Toggle - Right Side */}
             <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <motion.button
-                  key={link.name}
-                  onClick={() => handleNavClick(link.href)}
-                  className="text-foreground/80 hover:text-foreground transition-colors text-sm font-semibold"
-                  whileHover={{ y: -2 }}
-                  whileTap={{ y: 0 }}
-                >
-                  {link.name}
-                </motion.button>
-              ))}
+              {navLinks.map((link) =>
+                link.isPage ? (
+                  <Link key={link.name} href={link.href}>
+                    <motion.span
+                      className="text-foreground/80 hover:text-foreground transition-colors text-sm font-semibold cursor-pointer"
+                      whileHover={{ y: -2 }}
+                      whileTap={{ y: 0 }}
+                    >
+                      {link.name}
+                    </motion.span>
+                  </Link>
+                ) : (
+                  <motion.button
+                    key={link.name}
+                    onClick={() => handleNavClick(link.href, link.isPage)}
+                    className="text-foreground/80 hover:text-foreground transition-colors text-sm font-semibold"
+                    whileHover={{ y: -2 }}
+                    whileTap={{ y: 0 }}
+                  >
+                    {link.name}
+                  </motion.button>
+                )
+              )}
               <ThemeToggle />
             </div>
 
@@ -100,18 +124,31 @@ export default function Navbar() {
             className="fixed inset-x-0 top-16 z-40 bg-background/95 backdrop-blur-lg border-b border-border md:hidden"
           >
             <div className="px-4 py-6 space-y-4">
-              {navLinks.map((link, index) => (
-                <motion.button
-                  key={link.name}
-                  onClick={() => handleNavClick(link.href)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="block w-full text-left text-lg font-semibold text-foreground hover:text-primary transition-colors py-2"
-                >
-                  {link.name}
-                </motion.button>
-              ))}
+              {navLinks.map((link, index) =>
+                link.isPage ? (
+                  <Link key={link.name} href={link.href} onClick={() => setIsMobileMenuOpen(false)}>
+                    <motion.span
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="block w-full text-left text-lg font-semibold text-foreground hover:text-primary transition-colors py-2"
+                    >
+                      {link.name}
+                    </motion.span>
+                  </Link>
+                ) : (
+                  <motion.button
+                    key={link.name}
+                    onClick={() => handleNavClick(link.href, link.isPage)}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="block w-full text-left text-lg font-semibold text-foreground hover:text-primary transition-colors py-2"
+                  >
+                    {link.name}
+                  </motion.button>
+                )
+              )}
             </div>
           </motion.div>
         )}

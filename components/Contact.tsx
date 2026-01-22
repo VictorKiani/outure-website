@@ -52,8 +52,8 @@ export default function Contact() {
                 <MapPin className="w-6 h-6 text-primary" />
               </div>
               <div className="text-left">
-                <p className="text-sm text-muted-foreground">Location</p>
-                <p className="font-medium">New York City</p>
+                <p className="text-sm text-muted-foreground">Global Presence</p>
+                <p className="font-medium">NYC · Seoul · Malmö</p>
               </div>
             </motion.div>
           </div>

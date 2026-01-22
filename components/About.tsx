@@ -119,7 +119,7 @@ export default function About() {
                 className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background border border-border"
               >
                 <MapPin className="w-5 h-5 text-primary" />
-                <span className="font-medium">New York City</span>
+                <span className="font-medium">NYC · Seoul · Malmö</span>
               </motion.div>
             </div>
           </motion.div>

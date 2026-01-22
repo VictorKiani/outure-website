@@ -16,13 +16,21 @@ function getJsonLd(siteUrl: string) {
         '@id': `${siteUrl}/#organization`,
         name: 'OUTURE LLC',
         url: siteUrl,
-        description: 'Veteran-owned NYC-based consulting firm specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'New York City',
-          addressRegion: 'NY',
-          addressCountry: 'US',
-        },
+        description: 'Veteran-owned global consulting firm specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
+        location: [
+          {
+            '@type': 'Place',
+            name: 'New York City, USA',
+          },
+          {
+            '@type': 'Place',
+            name: 'Seoul, South Korea',
+          },
+          {
+            '@type': 'Place',
+            name: 'Malmö, Sweden',
+          },
+        ],
         email: 'victor.kiani@outure.co',
         founder: {
           '@type': 'Person',
@@ -65,10 +73,7 @@ function getJsonLd(siteUrl: string) {
         provider: {
           '@id': `${siteUrl}/#organization`,
         },
-        areaServed: {
-          '@type': 'Country',
-          name: 'United States',
-        },
+        areaServed: 'Worldwide',
         serviceType: [
           'Business Analysis',
           'Strategic Consulting',
