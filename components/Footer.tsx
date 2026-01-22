@@ -92,16 +92,11 @@ export default function Footer() {
       <div className="border-t border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="text-center md:text-left">
-              <p className="text-sm text-muted-foreground">
-                &copy; {currentYear} OUTURE LLC. All rights reserved.
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">
-                Veteran-Owned Business • D-U-N-S: 137354060
-              </p>
-            </div>
+            <p className="text-sm text-muted-foreground text-center md:text-left">
+              &copy; {currentYear} OUTURE LLC. All rights reserved.
+            </p>
             <p className="text-xs text-muted-foreground text-center md:text-right">
-              Business Analysis • Strategic Consulting • AI Integration • Automation
+              Veteran-Owned Business • DUNS: 137354060 • NY DOS ID: 756672
             </p>
           </div>
         </div>
