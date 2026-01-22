@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { MapPin, Target, Award, Users, Shield } from 'lucide-react'
+import { MapPin, Target, Award, Users, Shield, Hash } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { VictorGraphic, JaneGraphic } from '@/components/LeadershipGraphics'
@@ -146,6 +146,26 @@ export default function AboutPage() {
                 >
                   <MapPin className="w-5 h-5 text-primary" />
                   <span className="font-medium">NYC · Seoul · Malmö</span>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  viewport={{ once: true }}
+                  className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background border border-border"
+                >
+                  <Hash className="w-5 h-5 text-primary" />
+                  <span className="font-medium">DUNS: 137354060</span>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  viewport={{ once: true }}
+                  className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-background border border-border"
+                >
+                  <Hash className="w-5 h-5 text-primary" />
+                  <span className="font-medium">NY DOS ID: 756672</span>
                 </motion.div>
               </div>
             </motion.div>
