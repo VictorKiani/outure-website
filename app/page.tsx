@@ -7,85 +7,83 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
 // JSON-LD Structured Data for SEO
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': 'https://outure.co/#organization',
-      name: 'OUTURE LLC',
-      url: 'https://outure.co',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://outure.co/logo.png',
+function getJsonLd(siteUrl: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: 'OUTURE LLC',
+        url: siteUrl,
+        description: 'Veteran-owned NYC-based consulting firm specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'New York City',
+          addressRegion: 'NY',
+          addressCountry: 'US',
+        },
+        email: 'victor.kiani@outure.co',
+        founder: {
+          '@type': 'Person',
+          name: 'Victor Kiani',
+        },
+        foundingDate: '2025-03',
+        duns: '137354060',
+        keywords: 'veteran-owned business, consulting',
       },
-      description: 'Veteran-owned NYC-based consulting firm specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'New York City',
-        addressRegion: 'NY',
-        addressCountry: 'US',
+      {
+        '@type': 'WebSite',
+        '@id': `${siteUrl}/#website`,
+        url: siteUrl,
+        name: 'OUTURE',
+        description: 'Business Analysis, Strategy & AI Solutions',
+        publisher: {
+          '@id': `${siteUrl}/#organization`,
+        },
       },
-      email: 'victor.kiani@outure.co',
-      founder: {
+      {
         '@type': 'Person',
+        '@id': `${siteUrl}/#victor-kiani`,
         name: 'Victor Kiani',
+        jobTitle: 'Founder',
+        worksFor: {
+          '@id': `${siteUrl}/#organization`,
+        },
+        email: 'victor.kiani@outure.co',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'New York City',
+          addressRegion: 'NY',
+          addressCountry: 'US',
+        },
       },
-      foundingDate: '2025-03',
-      duns: '137354060',
-      keywords: 'veteran-owned business, consulting',
-      sameAs: [
-        'https://getouture.com',
-      ],
-    },
-    {
-      '@type': 'WebSite',
-      '@id': 'https://outure.co/#website',
-      url: 'https://outure.co',
-      name: 'OUTURE',
-      description: 'Business Analysis, Strategy & AI Solutions',
-      publisher: {
-        '@id': 'https://outure.co/#organization',
+      {
+        '@type': 'ProfessionalService',
+        '@id': `${siteUrl}/#service`,
+        name: 'OUTURE Consulting Services',
+        provider: {
+          '@id': `${siteUrl}/#organization`,
+        },
+        areaServed: {
+          '@type': 'Country',
+          name: 'United States',
+        },
+        serviceType: [
+          'Business Analysis',
+          'Strategic Consulting',
+          'AI Integration',
+          'Automation Solutions',
+        ],
       },
-    },
-    {
-      '@type': 'Person',
-      '@id': 'https://outure.co/#victor-kiani',
-      name: 'Victor Kiani',
-      jobTitle: 'Founder',
-      worksFor: {
-        '@id': 'https://outure.co/#organization',
-      },
-      email: 'victor.kiani@outure.co',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'New York City',
-        addressRegion: 'NY',
-        addressCountry: 'US',
-      },
-    },
-    {
-      '@type': 'ProfessionalService',
-      '@id': 'https://outure.co/#service',
-      name: 'OUTURE Consulting Services',
-      provider: {
-        '@id': 'https://outure.co/#organization',
-      },
-      areaServed: {
-        '@type': 'Country',
-        name: 'United States',
-      },
-      serviceType: [
-        'Business Analysis',
-        'Strategic Consulting',
-        'AI Integration',
-        'Automation Solutions',
-      ],
-    },
-  ],
+    ],
+  }
 }
 
 export default function Home() {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://outure.co'
+  const jsonLd = getJsonLd(siteUrl)
+
   return (
     <>
       <script

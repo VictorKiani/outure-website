@@ -2,8 +2,10 @@ import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import './globals.css'
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://outure.co'
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://outure.co'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'OUTURE | Business Analysis, Strategy & AI Solutions | Victor Kiani',
     template: '%s | OUTURE',
@@ -27,7 +29,7 @@ export const metadata: Metadata = {
     'digital transformation',
     'process automation',
   ],
-  authors: [{ name: 'Victor Kiani', url: 'https://outure.co' }],
+  authors: [{ name: 'Victor Kiani' }],
   creator: 'Victor Kiani',
   publisher: 'OUTURE LLC',
   formatDetection: {
@@ -38,10 +40,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://outure.co',
     siteName: 'OUTURE',
     title: 'OUTURE | Business Analysis, Strategy & AI Solutions',
-    description: 'NYC-based consulting firm founded by Victor Kiani. Specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
+    description: 'Veteran-owned NYC-based consulting firm founded by Victor Kiani. Specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
   },
   twitter: {
     card: 'summary_large_image',
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   alternates: {
-    canonical: 'https://outure.co',
+    canonical: '/',
   },
   verification: {
     // Add your verification codes here when you have them
