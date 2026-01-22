@@ -5,7 +5,6 @@ import { motion, useInView } from 'framer-motion'
 import { MapPin, Target, Award, Users, Shield } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { VictorGraphic, JaneGraphic } from '@/components/LeadershipGraphics'
 
 interface CounterProps {
   end: number
@@ -236,14 +235,17 @@ export default function AboutPage() {
               </div>
             </motion.div>
 
-            {/* 3D Graphic */}
+            {/* Photo Placeholder */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
+              className="flex items-center justify-center"
             >
-              <VictorGraphic />
+              <div className="w-64 h-64 rounded-2xl bg-muted border border-border flex items-center justify-center">
+                <span className="text-muted-foreground text-sm">Photo Coming Soon</span>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -253,15 +255,17 @@ export default function AboutPage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* 3D Graphic */}
+            {/* Photo Placeholder */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="order-2 lg:order-1"
+              className="order-2 lg:order-1 flex items-center justify-center"
             >
-              <JaneGraphic />
+              <div className="w-64 h-64 rounded-2xl bg-muted border border-border flex items-center justify-center">
+                <span className="text-muted-foreground text-sm">Photo Coming Soon</span>
+              </div>
             </motion.div>
 
             {/* Bio */}
