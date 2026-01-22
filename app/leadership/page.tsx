@@ -3,149 +3,7 @@
 import { motion } from 'framer-motion'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-
-function FunnelGraphic() {
-  // Generate random starting positions for input particles
-  const inputParticles = [
-    { id: 1, startX: -20, startY: 30, size: 8, delay: 0, duration: 3 },
-    { id: 2, startX: -40, startY: 70, size: 12, delay: 0.5, duration: 3.2 },
-    { id: 3, startX: -10, startY: 110, size: 6, delay: 1, duration: 2.8 },
-    { id: 4, startX: -50, startY: 150, size: 10, delay: 1.5, duration: 3.1 },
-    { id: 5, startX: -30, startY: 50, size: 7, delay: 2, duration: 2.9 },
-    { id: 6, startX: -25, startY: 130, size: 9, delay: 2.5, duration: 3.3 },
-    { id: 7, startX: -45, startY: 90, size: 11, delay: 0.3, duration: 3 },
-    { id: 8, startX: -15, startY: 170, size: 5, delay: 1.8, duration: 2.7 },
-  ]
-
-  const outputParticles = [
-    { id: 1, delay: 0, duration: 2 },
-    { id: 2, delay: 0.4, duration: 2 },
-    { id: 3, delay: 0.8, duration: 2 },
-    { id: 4, delay: 1.2, duration: 2 },
-    { id: 5, delay: 1.6, duration: 2 },
-    { id: 6, delay: 2, duration: 2 },
-  ]
-
-  return (
-    <div className="relative w-full h-72 flex items-center justify-center overflow-hidden">
-      <svg className="w-full max-w-xl h-full" viewBox="0 0 500 200" fill="none">
-
-        <defs>
-          <linearGradient id="funnelGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.15" />
-            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.3" />
-          </linearGradient>
-        </defs>
-
-        {/* Funnel body - horizontal cone */}
-        <path
-          d="M 120 25
-             C 140 25, 160 40, 200 60
-             L 280 85
-             L 340 95
-             L 340 105
-             L 280 115
-             L 200 140
-             C 160 160, 140 175, 120 175
-             C 110 175, 105 165, 105 160
-             L 105 40
-             C 105 35, 110 25, 120 25
-             Z"
-          fill="url(#funnelGradient)"
-          stroke="#8b5cf6"
-          strokeWidth="2"
-        />
-
-        {/* Funnel opening highlight */}
-        <ellipse cx="112" cy="100" rx="8" ry="70" fill="none" stroke="#8b5cf6" strokeWidth="2" strokeOpacity="0.5" />
-
-        {/* Input particles - chaotic, flowing into funnel */}
-        {inputParticles.map((p) => (
-          <motion.circle
-            key={`in-${p.id}`}
-            r={p.size}
-            fill={p.id % 2 === 0 ? "#a78bfa" : "#8b5cf6"}
-            fillOpacity={0.8}
-            initial={{ cx: p.startX, cy: p.startY, scale: 1 }}
-            animate={{
-              cx: [p.startX, 50, 105],
-              cy: [p.startY, p.startY * 0.7 + 30, 100],
-              scale: [1, 0.9, 0.6],
-              opacity: [0.8, 0.9, 0],
-            }}
-            transition={{
-              duration: p.duration,
-              delay: p.delay,
-              repeat: Infinity,
-              ease: "easeIn",
-            }}
-          />
-        ))}
-
-        {/* Particles traveling through funnel */}
-        <motion.circle r="5" fill="#8b5cf6"
-          animate={{ cx: [120, 220, 340], cy: [60, 80, 100], opacity: [0.7, 0.8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.2 }}
-        />
-        <motion.circle r="6" fill="#a78bfa"
-          animate={{ cx: [120, 230, 340], cy: [100, 100, 100], opacity: [0.8, 0.7, 0] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: "linear", delay: 0.8 }}
-        />
-        <motion.circle r="4" fill="#c4b5fd"
-          animate={{ cx: [120, 225, 340], cy: [140, 120, 100], opacity: [0.7, 0.8, 0] }}
-          transition={{ duration: 2.1, repeat: Infinity, ease: "linear", delay: 1.4 }}
-        />
-
-        {/* Output section - organized line of dots emerging */}
-        {outputParticles.map((p, i) => (
-          <motion.circle
-            key={`out-${p.id}`}
-            r="5"
-            fill="#8b5cf6"
-            cy={100}
-            initial={{ cx: 340, opacity: 0, scale: 0.5 }}
-            animate={{
-              cx: [340, 360 + i * 22],
-              opacity: [0, 1],
-              scale: [0.5, 1],
-            }}
-            transition={{
-              duration: p.duration,
-              delay: p.delay,
-              repeat: Infinity,
-              repeatDelay: 1,
-              ease: "easeOut",
-            }}
-          />
-        ))}
-
-        {/* Output line connector - pulses */}
-        <motion.line
-          x1="360" y1="100" x2="480" y2="100"
-          stroke="#8b5cf6"
-          strokeWidth="2"
-          initial={{ opacity: 0.2 }}
-          animate={{ opacity: [0.2, 0.5, 0.2] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-
-        {/* Arrow indicating flow direction */}
-        <motion.path
-          d="M 485 95 L 495 100 L 485 105"
-          stroke="#8b5cf6"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-          animate={{ x: [0, 5, 0] }}
-          transition={{ duration: 1, repeat: Infinity }}
-        />
-
-      </svg>
-    </div>
-  )
-}
+import { VictorGraphic, JaneGraphic } from '@/components/LeadershipGraphics'
 
 export default function LeadershipPage() {
   return (
@@ -205,10 +63,65 @@ export default function LeadershipPage() {
               </div>
             </motion.div>
 
-            {/* Funnel Graphic */}
-            <div>
-              <FunnelGraphic />
-            </div>
+            {/* 3D Funnel Graphic */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <VictorGraphic />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTO Section */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* 3D Neural Network Graphic */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="order-2 lg:order-1"
+            >
+              <JaneGraphic />
+            </motion.div>
+
+            {/* Bio */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="order-1 lg:order-2"
+            >
+              <h2 className="text-3xl font-bold mb-2">Jane Doe</h2>
+              <p className="text-primary font-medium mb-6">Chief Technology Officer</p>
+
+              <div className="space-y-4 text-muted-foreground">
+                <p>
+                  Jane brings over three years of experience at Amazon Web Services as a Solutions Architect,
+                  where she designed and implemented cloud infrastructure for enterprise clients across
+                  diverse industries. Her deep expertise in cloud architecture and AI integration drives
+                  OUTURE&apos;s technical strategy.
+                </p>
+                <p>
+                  A recognized voice in the AI community, Jane has presented enterprise AI solutions at
+                  AWS re:Invent, showcasing innovative approaches to machine learning deployment and
+                  scalable infrastructure design. Her work bridges the gap between cutting-edge technology
+                  and practical business applications.
+                </p>
+                <p>
+                  Originally from South Korea, Jane brings a global perspective to technology leadership,
+                  combining Eastern and Western approaches to innovation. Her expertise spans artificial
+                  intelligence, cloud computing, and enterprise architecture.
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
