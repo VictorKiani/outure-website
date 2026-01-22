@@ -276,24 +276,24 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="order-1 lg:order-2"
             >
-              <h3 className="text-3xl font-bold mb-2">Jane Doe</h3>
+              <h3 className="text-3xl font-bold mb-2">Jiyun Park</h3>
               <p className="text-primary font-medium mb-6">Chief Technology Officer</p>
 
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Jane brings over three years of experience at Amazon Web Services as a Solutions Architect,
+                  Jiyun brings over three years of experience at Amazon Web Services as a Solutions Architect,
                   where she designed and implemented cloud infrastructure for enterprise clients across
                   diverse industries. Her deep expertise in cloud architecture and AI integration drives
                   OUTURE&apos;s technical strategy.
                 </p>
                 <p>
-                  A recognized voice in the AI community, Jane has presented enterprise AI solutions at
+                  A recognized voice in the AI community, Jiyun has presented enterprise AI solutions at
                   AWS re:Invent, showcasing innovative approaches to machine learning deployment and
                   scalable infrastructure design. Her work bridges the gap between cutting-edge technology
                   and practical business applications.
                 </p>
                 <p>
-                  Originally from South Korea, Jane brings a global perspective to technology leadership,
+                  Originally from South Korea, Jiyun brings a global perspective to technology leadership,
                   combining Eastern and Western approaches to innovation. Her expertise spans artificial
                   intelligence, cloud computing, and enterprise architecture.
                 </p>
