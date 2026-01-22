@@ -9,10 +9,10 @@ import ThemeToggle from './ThemeToggle'
 import { smoothScroll } from '@/lib/utils'
 
 const navLinks = [
+  { name: 'Home', href: '/', isPage: true },
   { name: 'Services', href: 'services', isPage: false },
   { name: 'Approach', href: 'approach', isPage: false },
-  { name: 'About', href: 'about', isPage: false },
-  { name: 'Leadership', href: '/leadership', isPage: true },
+  { name: 'About', href: '/about', isPage: true },
   { name: 'Contact', href: 'contact', isPage: false },
 ]
 

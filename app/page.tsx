@@ -2,7 +2,6 @@ import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import Services from '@/components/Services'
 import Approach from '@/components/Approach'
-import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
@@ -38,6 +37,11 @@ function getJsonLd(siteUrl: string) {
         },
         foundingDate: '2025-03',
         duns: '137354060',
+        identifier: {
+          '@type': 'PropertyValue',
+          propertyID: 'NY DOS ID',
+          value: '756672',
+        },
         keywords: 'veteran-owned business, consulting',
       },
       {
@@ -100,7 +104,6 @@ export default function Home() {
         <Hero />
         <Services />
         <Approach />
-        <About />
         <Contact />
         <Footer />
       </main>
