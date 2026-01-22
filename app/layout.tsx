@@ -1,0 +1,97 @@
+import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
+import './globals.css'
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://outure.co'),
+  title: {
+    default: 'OUTURE | Business Analysis, Strategy & AI Solutions | Victor Kiani',
+    template: '%s | OUTURE',
+  },
+  description: 'OUTURE is a NYC-based consulting firm founded by Victor Kiani, specializing in business analysis, strategic thinking, innovation, automation, and AI solutions. Transform your business with data-driven insights.',
+  keywords: [
+    'Victor Kiani',
+    'OUTURE',
+    'business consulting',
+    'business analysis',
+    'AI solutions',
+    'automation',
+    'strategic consulting',
+    'NYC consultant',
+    'New York City',
+    'innovation',
+    'data analysis',
+    'AI integration',
+    'business strategy',
+    'digital transformation',
+    'process automation',
+  ],
+  authors: [{ name: 'Victor Kiani', url: 'https://outure.co' }],
+  creator: 'Victor Kiani',
+  publisher: 'OUTURE LLC',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://outure.co',
+    siteName: 'OUTURE',
+    title: 'OUTURE | Business Analysis, Strategy & AI Solutions',
+    description: 'NYC-based consulting firm founded by Victor Kiani. Specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'OUTURE | Business Analysis, Strategy & AI Solutions',
+    description: 'NYC-based consulting firm founded by Victor Kiani. Specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/favicon.svg',
+  },
+  manifest: '/site.webmanifest',
+  alternates: {
+    canonical: 'https://outure.co',
+  },
+  verification: {
+    // Add your verification codes here when you have them
+    // google: 'your-google-verification-code',
+    // yandex: 'your-yandex-verification-code',
+  },
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
