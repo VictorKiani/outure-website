@@ -47,21 +47,21 @@ function AnimatedCounter({ end, suffix = '', duration = 2 }: CounterProps) {
 const stats = [
   {
     icon: Target,
-    value: 100,
+    value: 15,
     suffix: '+',
     label: 'Projects Delivered',
   },
   {
     icon: Users,
-    value: 50,
+    value: 10,
     suffix: '+',
     label: 'Clients Served',
   },
   {
     icon: Award,
-    value: 10,
-    suffix: '+',
-    label: 'Years Experience',
+    value: 98,
+    suffix: '%',
+    label: 'Client Satisfaction',
   },
 ]
 
