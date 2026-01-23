@@ -10,7 +10,6 @@ import { smoothScroll } from '@/lib/utils'
 
 const navLinks = [
   { name: 'Home', href: '/', isPage: true },
-  { name: 'Services', href: '/services', isPage: true },
   { name: 'Approach', href: 'approach', isPage: false },
   { name: 'About', href: '/about', isPage: true },
   { name: 'Contact', href: 'contact', isPage: false },
