@@ -1,36 +1,112 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Database, Brain, Cpu, BarChart3 } from 'lucide-react'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { Search, GitBranch, Lightbulb, Target, CheckCircle2, RefreshCw } from 'lucide-react'
 
 const stages = [
   {
-    icon: Database,
-    label: 'Data Input',
-    description: 'Gather & Analyze',
+    icon: Search,
+    label: 'Discovery',
+    description: 'Understand & Assess',
     color: 'text-blue-500',
     bgColor: 'bg-blue-500/10',
   },
   {
-    icon: Cpu,
-    label: 'Processing',
-    description: 'Transform & Clean',
+    icon: GitBranch,
+    label: 'Analysis',
+    description: 'Pattern & Insight',
     color: 'text-purple-500',
     bgColor: 'bg-purple-500/10',
   },
   {
-    icon: Brain,
-    label: 'AI Analysis',
-    description: 'Insights & Patterns',
+    icon: Lightbulb,
+    label: 'Strategy',
+    description: 'Tailored Solutions',
     color: 'text-pink-500',
     bgColor: 'bg-pink-500/10',
   },
   {
-    icon: BarChart3,
+    icon: Target,
     label: 'Results',
-    description: 'Actionable Output',
+    description: 'Measurable Impact',
     color: 'text-green-500',
     bgColor: 'bg-green-500/10',
+  },
+]
+
+// Detailed explanations for each stage
+const stageDetails = [
+  {
+    title: 'Discovery',
+    subtitle: 'Understanding Your Business Inside & Out',
+    description: "We immerse ourselves in your organization to understand what you have, what you need, and where the gaps are. Through structured interviews, workshops, and data collection, we build a comprehensive picture of your current state. No assumptions — just thorough, methodical discovery that forms the foundation for everything that follows.",
+    bullets: [
+      'Stakeholder interviews & executive alignment sessions',
+      'Current state process mapping & documentation review',
+      'Data landscape assessment & system inventory',
+      'Pain point identification & opportunity cataloging',
+      'Industry benchmarking & best practice research',
+      'Requirements gathering & success criteria definition',
+    ],
+    color: 'blue',
+    borderColor: 'border-blue-500/30',
+    bgColor: 'bg-blue-500/5',
+    iconColor: 'text-blue-500',
+  },
+  {
+    title: 'Analysis',
+    subtitle: 'Turning Complexity into Clarity',
+    description: "We apply rigorous analytical frameworks to uncover insights that others miss. From SWOT and competitive analysis to financial modeling and risk assessment, we examine your business from every angle. Patterns emerge, opportunities surface, and a clear picture of your path forward begins to take shape.",
+    bullets: [
+      'SWOT analysis & strategic positioning assessment',
+      'Competitive landscape & market analysis',
+      'Business process analysis & efficiency audits',
+      'Financial modeling & ROI projections',
+      'Risk assessment & mitigation planning',
+      'Gap analysis & capability mapping',
+      'Root cause analysis for key challenges',
+    ],
+    color: 'purple',
+    borderColor: 'border-purple-500/30',
+    bgColor: 'bg-purple-500/5',
+    iconColor: 'text-purple-500',
+  },
+  {
+    title: 'Strategy',
+    subtitle: 'Tailored Solutions, Not Templates',
+    description: "We develop strategies specific to your situation, culture, and goals. Where AI, automation, or new technologies can add value, we identify exactly how to leverage them effectively. Every recommendation is practical, prioritized, and designed to deliver measurable results within your constraints and timeline.",
+    bullets: [
+      'Custom strategy development & roadmap creation',
+      'AI & automation opportunity identification',
+      'Technology selection & vendor evaluation',
+      'Change management & adoption planning',
+      'Resource allocation & budget planning',
+      'Phased implementation approach design',
+      'KPI definition & measurement framework',
+    ],
+    color: 'pink',
+    borderColor: 'border-pink-500/30',
+    bgColor: 'bg-pink-500/5',
+    iconColor: 'text-pink-500',
+  },
+  {
+    title: 'Results',
+    subtitle: 'Action, Not Just Advice',
+    description: "We don't just hand over a report and walk away. We partner with you through implementation, helping navigate challenges, adjust course when needed, and ensure the strategy translates into real-world impact. Our engagement doesn't end until you're seeing measurable outcomes and your team is equipped to sustain momentum.",
+    bullets: [
+      'Detailed implementation roadmaps & action plans',
+      'Hands-on execution support & project management',
+      'Performance tracking & KPI monitoring dashboards',
+      'Stakeholder communication & progress reporting',
+      'Continuous optimization & iteration cycles',
+      'Knowledge transfer & team capability building',
+      'Post-implementation review & lessons learned',
+    ],
+    color: 'green',
+    borderColor: 'border-green-500/30',
+    bgColor: 'bg-green-500/5',
+    iconColor: 'text-green-500',
   },
 ]
 
@@ -755,11 +831,246 @@ function MobilePulse({ delay }: { delay: number }) {
   )
 }
 
+// Mini-animation components for each stage detail card
+function DiscoveryAnimation() {
+  return (
+    <div className="relative w-full h-24 flex items-center justify-center">
+      {/* Central magnifying glass */}
+      <motion.div
+        className="relative z-10"
+        animate={{ rotate: [0, 10, -10, 0] }}
+        transition={{ duration: 4, repeat: Infinity }}
+      >
+        <Search className="w-10 h-10 text-blue-500" />
+      </motion.div>
+      {/* Dots being discovered */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-2 h-2 rounded-full bg-blue-400"
+          style={{
+            left: `${20 + (i % 3) * 30}%`,
+            top: `${25 + Math.floor(i / 3) * 50}%`,
+          }}
+          animate={{
+            scale: [0, 1, 1, 0],
+            opacity: [0, 1, 1, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            delay: i * 0.3,
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+function AnalysisAnimation() {
+  return (
+    <div className="relative w-full h-24 flex items-center justify-center">
+      {/* Tangled lines becoming organized */}
+      <svg width="120" height="80" viewBox="0 0 120 80" className="overflow-visible">
+        {/* Chaotic lines on left */}
+        {[0, 1, 2].map((i) => (
+          <motion.path
+            key={i}
+            d={`M10 ${20 + i * 20} Q30 ${40 + (i - 1) * 15}, 50 40`}
+            stroke="#a855f7"
+            strokeWidth="2"
+            fill="none"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: [0, 0.6, 0.6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
+          />
+        ))}
+        {/* Organized lines on right */}
+        {[0, 1, 2].map((i) => (
+          <motion.path
+            key={`out-${i}`}
+            d={`M70 40 L110 ${20 + i * 20}`}
+            stroke="#a855f7"
+            strokeWidth="2"
+            fill="none"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: [0, 0.8, 0.8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, delay: 0.5 + i * 0.15 }}
+          />
+        ))}
+        {/* Center processing node */}
+        <motion.circle
+          cx="60"
+          cy="40"
+          r="8"
+          fill="#a855f7"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 1, repeat: Infinity }}
+        />
+      </svg>
+    </div>
+  )
+}
+
+function StrategyAnimation() {
+  return (
+    <div className="relative w-full h-24 flex items-center justify-center">
+      {/* Lightbulb with radiating ideas */}
+      <motion.div
+        className="relative z-10"
+        animate={{ scale: [1, 1.1, 1] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <Lightbulb className="w-10 h-10 text-pink-500" />
+      </motion.div>
+      {/* Radiating lines */}
+      {[...Array(8)].map((_, i) => {
+        const angle = (i * 45) * (Math.PI / 180)
+        return (
+          <motion.div
+            key={i}
+            className="absolute w-6 h-0.5 bg-gradient-to-r from-pink-500 to-transparent origin-left"
+            style={{
+              left: '50%',
+              top: '50%',
+              transform: `rotate(${i * 45}deg)`,
+            }}
+            animate={{
+              scaleX: [0, 1, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              delay: i * 0.1,
+            }}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
+function ResultsAnimation() {
+  return (
+    <div className="relative w-full h-24 flex items-center justify-center gap-2">
+      {/* Growing bar chart */}
+      {[0, 1, 2, 3].map((i) => (
+        <motion.div
+          key={i}
+          className="w-4 bg-gradient-to-t from-green-600 to-green-400 rounded-t"
+          initial={{ height: 0 }}
+          animate={{ height: [0, 20 + i * 15, 20 + i * 15, 0] }}
+          transition={{
+            duration: 2.5,
+            repeat: Infinity,
+            delay: i * 0.15,
+            times: [0, 0.4, 0.8, 1],
+          }}
+        />
+      ))}
+      {/* Checkmark appearing */}
+      <motion.div
+        className="absolute -right-2 -top-2"
+        animate={{ scale: [0, 1.2, 1], opacity: [0, 1, 1, 0] }}
+        transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
+      >
+        <CheckCircle2 className="w-6 h-6 text-green-500" />
+      </motion.div>
+    </div>
+  )
+}
+
+const detailAnimations = [DiscoveryAnimation, AnalysisAnimation, StrategyAnimation, ResultsAnimation]
+
+// Progressive Scroll Reveal Component
+function ScrollRevealStages() {
+  return (
+    <div className="relative mt-16 space-y-8">
+      {stageDetails.map((detail, index) => {
+        const AnimationComponent = detailAnimations[index]
+        return (
+          <ScrollStage
+            key={detail.title}
+            detail={detail}
+            index={index}
+            AnimationComponent={AnimationComponent}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
+// Individual stage that fades in when scrolled into view
+function ScrollStage({
+  detail,
+  index,
+  AnimationComponent
+}: {
+  detail: typeof stageDetails[0]
+  index: number
+  AnimationComponent: React.ComponentType
+}) {
+  const stageRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: stageRef,
+    offset: ["start end", "center center"]
+  })
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.5, 1])
+  const y = useTransform(scrollYProgress, [0, 1], [80, 0])
+  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1])
+
+  return (
+    <motion.div
+      ref={stageRef}
+      style={{ opacity, y, scale }}
+      className="max-w-2xl mx-auto px-4"
+    >
+      <div className={`p-6 md:p-10 rounded-2xl border ${detail.borderColor} ${detail.bgColor} bg-background/90 backdrop-blur-sm`}>
+        {/* Step indicator */}
+        <div className="flex items-center gap-3 mb-4">
+          <span className={`text-xs font-bold uppercase tracking-widest ${detail.iconColor}`}>
+            Step {index + 1}
+          </span>
+          <div className={`flex-1 h-px bg-gradient-to-r ${detail.borderColor} to-transparent`} />
+        </div>
+
+        {/* Mini Animation */}
+        <div className="mb-6">
+          <AnimationComponent />
+        </div>
+
+        {/* Content */}
+        <h4 className="text-2xl md:text-3xl font-bold text-foreground mb-2 tracking-tight">
+          {detail.title}
+        </h4>
+        <p className={`text-base md:text-lg font-semibold ${detail.iconColor} mb-4`}>
+          {detail.subtitle}
+        </p>
+        <p className="text-base md:text-lg text-muted-foreground mb-6 leading-relaxed">
+          {detail.description}
+        </p>
+
+        {/* Bullet points */}
+        <ul className="space-y-3">
+          {detail.bullets.map((bullet) => (
+            <li
+              key={bullet}
+              className="flex items-center gap-3 text-base text-foreground/80 font-medium"
+            >
+              <CheckCircle2 className={`w-5 h-5 ${detail.iconColor} flex-shrink-0`} />
+              {bullet}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function DataFlowAnimation() {
-  // Final connector configuration:
-  // 1. Data Input → Processing: Scattered dots (chaotic)
-  // 2. Processing → AI Analysis: Clustering (organizing data)
-  // 3. AI Analysis → Results: Pulse/Radar (pattern detection)
   const connectors = [
     { Component: ScatteredDotsConnector, MobileComponent: MobileScatteredDots },
     { Component: ClusteringConnector, MobileComponent: MobileClustering },
@@ -768,8 +1079,8 @@ export default function DataFlowAnimation() {
 
   return (
     <div className="relative py-8 md:py-16 overflow-hidden">
-      {/* Desktop Layout */}
-      <div className="hidden md:flex justify-center items-start">
+      {/* Desktop Layout - Flow Animation */}
+      <div className="hidden md:flex justify-center items-center">
         {stages.map((stage, index) => (
           <div key={stage.label} className="flex items-center">
             <motion.div
@@ -779,14 +1090,19 @@ export default function DataFlowAnimation() {
               viewport={{ once: true }}
               className="flex flex-col items-center"
             >
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className={`w-24 h-24 rounded-2xl ${stage.bgColor} flex items-center justify-center mb-3 transition-transform`}
-              >
-                <stage.icon className={`w-12 h-12 ${stage.color}`} />
-              </motion.div>
-              <h4 className="font-semibold text-foreground text-base">{stage.label}</h4>
-              <p className="text-sm text-muted-foreground">{stage.description}</p>
+              <div className="relative">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className={`w-20 h-20 rounded-2xl ${stage.bgColor} flex items-center justify-center transition-transform relative z-10`}
+                >
+                  <stage.icon className={`w-10 h-10 ${stage.color}`} />
+                </motion.div>
+                <motion.div
+                  className={`absolute inset-0 rounded-2xl ${stage.bgColor}`}
+                  animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                />
+              </div>
             </motion.div>
 
             {index < stages.length - 1 && (() => {
@@ -797,8 +1113,8 @@ export default function DataFlowAnimation() {
         ))}
       </div>
 
-      {/* Mobile Layout - Vertical */}
-      <div className="flex md:hidden flex-col items-center gap-2">
+      {/* Mobile Layout - Flow Animation */}
+      <div className="flex md:hidden flex-col items-center gap-1">
         {stages.map((stage, index) => (
           <div key={stage.label} className="flex flex-col items-center">
             <motion.div
@@ -808,14 +1124,19 @@ export default function DataFlowAnimation() {
               viewport={{ once: true }}
               className="flex flex-col items-center"
             >
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                className={`w-20 h-20 rounded-2xl ${stage.bgColor} flex items-center justify-center mb-2`}
-              >
-                <stage.icon className={`w-10 h-10 ${stage.color}`} />
-              </motion.div>
-              <h4 className="font-semibold text-foreground text-sm">{stage.label}</h4>
-              <p className="text-xs text-muted-foreground">{stage.description}</p>
+              <div className="relative">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  className={`w-14 h-14 rounded-2xl ${stage.bgColor} flex items-center justify-center relative z-10`}
+                >
+                  <stage.icon className={`w-7 h-7 ${stage.color}`} />
+                </motion.div>
+                <motion.div
+                  className={`absolute inset-0 rounded-2xl ${stage.bgColor}`}
+                  animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0, 0.4] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                />
+              </div>
             </motion.div>
 
             {index < stages.length - 1 && (() => {
@@ -825,6 +1146,34 @@ export default function DataFlowAnimation() {
           </div>
         ))}
       </div>
+
+      {/* Iterative Cycles Badge */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="mt-12 md:mt-16 text-center"
+      >
+        <div className="inline-flex items-center gap-3 md:gap-4 px-6 md:px-8 py-3 md:py-4 rounded-full bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-border">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
+            <RefreshCw className="w-5 h-5 text-primary" />
+          </motion.div>
+          <span className="text-xs md:text-sm font-medium text-muted-foreground">
+            Continuous improvement through iterative cycles
+          </span>
+        </div>
+      </motion.div>
+
+      {/* Progressive Scroll Reveal */}
+      <ScrollRevealStages />
 
       {/* Animated background dots */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
@@ -836,10 +1185,7 @@ export default function DataFlowAnimation() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
-            animate={{
-              opacity: [0.2, 0.5, 0.2],
-              scale: [1, 1.5, 1],
-            }}
+            animate={{ opacity: [0.2, 0.5, 0.2], scale: [1, 1.5, 1] }}
             transition={{
               duration: 3 + Math.random() * 2,
               repeat: Infinity,
