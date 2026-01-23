@@ -1,112 +1,49 @@
-import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import DataToInsights from '@/components/DataToInsights'
-import Capabilities from '@/components/Capabilities'
-import Contact from '@/components/Contact'
-import Footer from '@/components/Footer'
+import type { Metadata } from 'next'
 
-// JSON-LD Structured Data for SEO
-function getJsonLd(siteUrl: string) {
-  return {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': `${siteUrl}/#organization`,
-        name: 'OUTURE LLC',
-        url: siteUrl,
-        description: 'Veteran-owned global consulting firm specializing in business analysis, strategic thinking, innovation, automation, and AI solutions.',
-        location: [
-          {
-            '@type': 'Place',
-            name: 'New York City, USA',
-          },
-          {
-            '@type': 'Place',
-            name: 'Seoul, South Korea',
-          },
-          {
-            '@type': 'Place',
-            name: 'Malmö, Sweden',
-          },
-        ],
-        email: 'victor.kiani@outure.co',
-        founder: {
-          '@type': 'Person',
-          name: 'Victor Kiani',
-        },
-        foundingDate: '2025-03',
-        duns: '137354060',
-        identifier: {
-          '@type': 'PropertyValue',
-          propertyID: 'NY DOS ID',
-          value: '756672',
-        },
-        keywords: 'veteran-owned business, consulting',
-      },
-      {
-        '@type': 'WebSite',
-        '@id': `${siteUrl}/#website`,
-        url: siteUrl,
-        name: 'OUTURE',
-        description: 'Business Analysis, Strategy & AI Solutions',
-        publisher: {
-          '@id': `${siteUrl}/#organization`,
-        },
-      },
-      {
-        '@type': 'Person',
-        '@id': `${siteUrl}/#victor-kiani`,
-        name: 'Victor Kiani',
-        jobTitle: 'Founder',
-        worksFor: {
-          '@id': `${siteUrl}/#organization`,
-        },
-        email: 'victor.kiani@outure.co',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'New York City',
-          addressRegion: 'NY',
-          addressCountry: 'US',
-        },
-      },
-      {
-        '@type': 'ProfessionalService',
-        '@id': `${siteUrl}/#service`,
-        name: 'OUTURE Consulting Services',
-        provider: {
-          '@id': `${siteUrl}/#organization`,
-        },
-        areaServed: 'Worldwide',
-        serviceType: [
-          'Business Analysis',
-          'Strategic Consulting',
-          'AI Integration',
-          'Automation Solutions',
-        ],
-      },
-    ],
-  }
+export const metadata: Metadata = {
+  title: 'OUTURE | Coming Soon',
+  description: 'OUTURE is currently under maintenance. We\'ll be back soon with something great.',
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
-export default function Home() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://getouture.com'
-  const jsonLd = getJsonLd(siteUrl)
-
+export default function MaintenancePage() {
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <main className="min-h-screen">
-        <Navbar />
-        <Hero />
-        <Capabilities />
-        <DataToInsights />
-        <Contact />
-        <Footer />
-      </main>
-    </>
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 px-6">
+      <div className="text-center max-w-2xl">
+        {/* Logo */}
+        <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
+          OUTURE
+        </h1>
+
+        {/* Status */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-200 text-sm font-medium mb-8">
+          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+          Under Maintenance
+        </div>
+
+        {/* Message */}
+        <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+          We&apos;re refining our experience to serve you better.
+          <br className="hidden sm:block" />
+          We&apos;ll be back online shortly.
+        </p>
+
+        {/* Contact */}
+        <div className="pt-8 border-t border-gray-200 dark:border-gray-800">
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">
+            Need to reach us?
+          </p>
+          <a
+            href="mailto:victor.kiani@outure.co"
+            className="text-gray-900 dark:text-white font-medium hover:underline"
+          >
+            victor.kiani@outure.co
+          </a>
+        </div>
+      </div>
+    </main>
   )
 }
